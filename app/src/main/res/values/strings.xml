@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Fotball Club</string>
+    <string name="madrid_desc">Real Madrid, is a professional football club based in Madrid, Spain. Founded on 6 March 1902 as the Madrid Football Club, the club has traditionally worn a white home kit since inception. The word real is Spanish for \\\"royal\\\" and was bestowed to the club by King Alfonso XIII in 1920 together with the royal crown in the emblem.</string>
+    <string name="madrid">Real Madrid</string>
 </resources>
