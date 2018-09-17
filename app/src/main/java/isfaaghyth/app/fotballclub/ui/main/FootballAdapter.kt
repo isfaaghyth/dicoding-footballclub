@@ -14,7 +14,7 @@ import org.jetbrains.anko.imageResource
  * Created by isfaaghyth on 9/17/18.
  * github: @isfaaghyth
  */
-class FootballAdapter(val clubs: ArrayList<Club> = arrayListOf(), val listener: FootballListener)
+class FootballAdapter(private val clubs: ArrayList<Club> = arrayListOf(), private val listener: FootballListener)
     : RecyclerView.Adapter<FootballAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
