@@ -18,7 +18,7 @@ class FootballAdapter(private val clubs: ArrayList<Club> = arrayListOf(), privat
     : RecyclerView.Adapter<FootballAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            Holder(FootballComponent().createView(AnkoContext.create(parent.context, parent)))
+            Holder(FootballComponent(parent.context).createView(AnkoContext.create(parent.context, parent)))
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.imgClub.imageResource = clubs[position].icon

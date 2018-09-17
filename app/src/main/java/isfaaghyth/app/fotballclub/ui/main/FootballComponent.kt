@@ -1,15 +1,17 @@
 package isfaaghyth.app.fotballclub.ui.main
 
+import android.content.Context
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import isfaaghyth.app.fotballclub.utils.selectableItemBackgroundResource
 import org.jetbrains.anko.*
 
 /**
  * Created by isfaaghyth on 9/17/18.
  * github: @isfaaghyth
  */
-class FootballComponent : AnkoComponent<ViewGroup> {
+class FootballComponent(val context: Context) : AnkoComponent<ViewGroup> {
 
     companion object {
         val itemId = 1
@@ -19,11 +21,14 @@ class FootballComponent : AnkoComponent<ViewGroup> {
 
     override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
         linearLayout {
+            lparams(width = matchParent)
+
             id = itemId
             isClickable = true
             gravity = Gravity.CENTER_VERTICAL
             orientation = LinearLayout.HORIZONTAL
             padding = dip(10)
+            backgroundResource = context.selectableItemBackgroundResource
 
             imageView {
                 id = imgClubId

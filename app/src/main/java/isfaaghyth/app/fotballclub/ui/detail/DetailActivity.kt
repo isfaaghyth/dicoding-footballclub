@@ -10,6 +10,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DetailComponent().setContentView(this)
+        DetailComponent(intent).setContentView(this)
     }
+
 }

@@ -9,7 +9,9 @@ import isfaaghyth.app.fotballclub.BuildConfig
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.data.local.ClubManager
 import isfaaghyth.app.fotballclub.data.model.Club
+import isfaaghyth.app.fotballclub.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
@@ -24,9 +26,7 @@ class MainActivity : AppCompatActivity() {
         val clubsRepository = ClubManager.get(this)
         lstFootball.layoutManager = LinearLayoutManager(this)
         lstFootball.adapter = FootballAdapter(clubsRepository, object : FootballListener {
-            override fun onClicked(club: Club) {
-                this@MainActivity.toast(club.name)
-            }
+            override fun onClicked(club: Club) = startActivity(intentFor<DetailActivity>("club" to club))
         })
     }
 
