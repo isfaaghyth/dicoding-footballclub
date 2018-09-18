@@ -14,7 +14,6 @@ import org.jetbrains.anko.*
 class FootballComponent(val context: Context) : AnkoComponent<ViewGroup> {
 
     companion object {
-        val itemId = 1
         val imgClubId = 2
         val txtClubNameId = 3
     }
@@ -23,7 +22,6 @@ class FootballComponent(val context: Context) : AnkoComponent<ViewGroup> {
         linearLayout {
             lparams(width = matchParent)
 
-            id = itemId
             isClickable = true
             gravity = Gravity.CENTER_VERTICAL
             orientation = LinearLayout.HORIZONTAL
