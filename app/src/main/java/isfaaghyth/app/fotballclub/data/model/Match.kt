@@ -1,6 +1,7 @@
 package isfaaghyth.app.fotballclub.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Match(
         @SerializedName("dateEvent") var dateEvent: String?,
@@ -40,4 +41,4 @@ data class Match(
         @SerializedName("strSeason") var strSeason: String?,
         @SerializedName("strSport") var strSport: String?,
         @SerializedName("strTime") var strTime: String?
-)
+) : Serializable

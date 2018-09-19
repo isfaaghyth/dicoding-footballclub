@@ -35,13 +35,9 @@ abstract class BaseFragment<out P : BasePresenter<*>> : Fragment(), BaseView {
         presenter.dettachView()
     }
 
-    override fun showLoading() {
+    override fun showLoading() {}
 
-    }
-
-    override fun hideLoading() {
-
-    }
+    override fun hideLoading() {}
 
     override fun onError(message: String?) = Snacky.builder()
             .setActivity(activity)

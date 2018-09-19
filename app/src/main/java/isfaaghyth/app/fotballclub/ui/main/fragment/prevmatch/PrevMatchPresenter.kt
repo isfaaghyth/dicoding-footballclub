@@ -13,10 +13,16 @@ class PrevMatchPresenter(view: PrevMatchView) : BasePresenter<PrevMatchView>() {
     init { super.attachView(view) }
 
     fun getPrevMatch() {
+        view().showLoading()
         subscribe(getService().prevMatch("4328")
                 .compose(ScheduleUtils.set<MatchEvent>())
                 .subscribe(
-                        { res -> view().onPrevMatchData(res) },
+                        { res ->
+                            run {
+                                view().onPrevMatchData(res)
+                                onFinishRequest()
+                            }
+                        },
                         { error: Throwable -> this.catchError(error) }
                 ))
     }

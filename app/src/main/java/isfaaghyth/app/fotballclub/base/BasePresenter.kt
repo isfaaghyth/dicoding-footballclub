@@ -14,12 +14,11 @@ import java.net.SocketTimeoutException
  */
 open class BasePresenter<V: BaseView> : BasePresenterImpl<V> {
 
-    private lateinit var view: V
+    private var composite: CompositeDisposable = CompositeDisposable()
     private lateinit var routes: Routes
-    private lateinit var composite: CompositeDisposable
+    private lateinit var view: V
 
     fun subscribe(disposable: Disposable) {
-        composite = CompositeDisposable()
         view().showLoading()
         composite.add(disposable)
     }

@@ -1,13 +1,13 @@
 package isfaaghyth.app.fotballclub.ui.adapter
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import org.jetbrains.anko.*
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.data.model.Match
+import isfaaghyth.app.fotballclub.ui.matchdetail.MatchDetailActivity
 import kotlinx.android.synthetic.main.item_match_schedule.view.*
 
 /**
@@ -20,7 +20,7 @@ class MatchAdapter(private var matches: List<Match>): RecyclerView.Adapter<Match
         val viewHolder = Holder(LayoutInflater.from(parent?.context).inflate(R.layout.item_match_schedule, parent, false))
         viewHolder.itemView.setOnClickListener {
             val position = viewHolder.adapterPosition
-            Log.e("TAG", matches[position].strHomeTeam)
+            parent?.context?.startActivity<MatchDetailActivity>("match" to matches[position])
         }
         return viewHolder
     }
@@ -40,6 +40,13 @@ class MatchAdapter(private var matches: List<Match>): RecyclerView.Adapter<Match
             txtHomeTeam?.text = match.strHomeTeam
             txtAwayTeam?.text = match.strAwayTeam
             txtDate?.text = match.dateEvent
+
+            if (match.intHomeScore !== null) {
+                val homeScore: Int? = match.intHomeScore?.toInt() ?: 0
+                val awayScore: Int? = match.intAwayScore?.toInt() ?: 0
+                txtHomeTeam?.text = "${match.strHomeTeam} ($homeScore)"
+                txtAwayTeam?.text = "${match.strAwayTeam} ($awayScore)"
+            }
         }
     }
 

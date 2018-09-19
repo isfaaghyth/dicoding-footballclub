@@ -19,9 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.matchdetail.MatchDetailActivity"
-            android:parentActivityName=".ui.main.MainActivity"/>
+        <activity android:name=".ui.matchdetail.MatchDetailActivity"/>
 
     </application>
 
