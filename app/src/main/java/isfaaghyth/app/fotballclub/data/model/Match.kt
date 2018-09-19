@@ -3,6 +3,10 @@ package isfaaghyth.app.fotballclub.data.model
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+/**
+ * Created by isfaaghyth on 9/19/18.
+ * github: @isfaaghyth
+ */
 data class Match(
         @SerializedName("dateEvent") var dateEvent: String?,
         @SerializedName("idAwayTeam") var idAwayTeam: String,

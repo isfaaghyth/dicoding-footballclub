@@ -15,6 +15,7 @@ android {
         multiDexEnabled = true
 
         buildConfigField("String", "MAIN_URL", "\"https://www.thesportsdb.com/\"")
+        buildConfigField("String", "APY_KEY", "\"4012930\"")
     }
     buildTypes {
         release {
