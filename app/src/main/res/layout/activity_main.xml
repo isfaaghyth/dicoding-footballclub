@@ -5,22 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
     tools:context="isfaaghyth.app.fotballclub.ui.main.MainActivity">
 
     <isfaaghyth.app.fotballclub.utils.view.CustomViewPager
         android:id="@+id/viewpagerMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomBarMain"
-        android:layout_marginBottom="6dp"/>
+        android:layout_above="@+id/_bottom_layout"/>
 
-    <com.roughike.bottombar.BottomBar
-        android:id="@+id/bottomBarMain"
+    <LinearLayout
+        android:id="@+id/_bottom_layout"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_height="60dp"
-        android:background="#FFFFFF"
-        app:bb_inActiveTabColor="@android:color/darker_gray"
-        app:bb_tabXmlResource="@xml/bottombar"/>
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/shadow"/>
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomBarMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemBackground="@android:color/white"
+            app:itemIconTint="@drawable/nav_item_color_state"
+            app:itemTextColor="@drawable/nav_item_color_state"
+            app:menu="@menu/bottom_navigation_menu" />
+
+    </LinearLayout>
 
 </RelativeLayout>

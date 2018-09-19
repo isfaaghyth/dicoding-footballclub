@@ -13,7 +13,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViewPagerMain()
-        bottomBarMain.setOnTabSelectListener(this::onBottomBarSelected)
+        onBottomBarSelected()
+        bottomBarMain.selectedItemId = R.id.mnPrevMatch
     }
 
     private fun setupViewPagerMain() {
@@ -26,11 +27,12 @@ class MainActivity : AppCompatActivity() {
         viewpagerMain.adapter = adapter
     }
 
-    private fun onBottomBarSelected(resId: Int) {
-        when (resId) {
-            R.id.tab_prev_match -> viewpagerMain.currentItem = 0
-            R.id.tab_next_match -> viewpagerMain.currentItem = 1
+    private fun onBottomBarSelected() = bottomBarMain.setOnNavigationItemSelectedListener { item ->
+        when(item.itemId) {
+            R.id.mnPrevMatch -> viewpagerMain.currentItem = 0
+            R.id.mnNextMatch -> viewpagerMain.currentItem = 1
         }
+        true
     }
 
 }
