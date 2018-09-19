@@ -13,6 +13,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
+
+        buildConfigField("String", "MAIN_URL", "\"https://www.thesportsdb.com/\"")
     }
     buildTypes {
         release {
@@ -28,12 +30,39 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //android support
     compile 'com.android.support:appcompat-v7:27.0.0'
     compile 'com.android.support:design:27.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
+    //anko
     compile "org.jetbrains.anko:anko:$anko_version"
     compile "org.jetbrains.anko:anko-commons:$anko_version"
+
+    //glide
+    compile 'com.github.bumptech.glide:glide:4.5.0'
+    kapt 'com.github.bumptech.glide:compiler:4.5.0'
+
+    //network
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
+    //storage
+    compile 'com.github.isfaaghyth:Rak:1.0.0'
+
+    //converter
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+
+    //calligraphy
+    compile 'uk.co.chrisjenx:calligraphy:2.3.0'
+
+    //design
+    compile 'com.github.matecode:Snacky:1.0.3'
+
+    //reactive
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
     testCompile 'junit:junit:4.12'
 }

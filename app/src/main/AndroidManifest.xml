@@ -18,7 +18,7 @@
         </activity>
 
         <activity
-            android:name=".ui.detail.DetailActivity"
+            android:name=".ui.matchdetail.MatchDetailActivity"
             android:parentActivityName=".ui.main.MainActivity"/>
 
     </application>
