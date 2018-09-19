@@ -1,12 +1,10 @@
 package isfaaghyth.app.fotballclub.ui.matchdetail
 
-import android.util.Log
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.base.BaseActivity
 import isfaaghyth.app.fotballclub.data.model.Match
-import isfaaghyth.app.fotballclub.data.model.Team
 import isfaaghyth.app.fotballclub.utils.DelimeterUtil
 import kotlinx.android.synthetic.main.activity_match_detail.*
 
@@ -28,7 +26,6 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
         txtDate.text = match.dateEvent
 
         //home
-        //imgHomeTeam
         txtHomeTeam.text = match.strHomeTeam
         txtHomeScorer.text = DelimeterUtil.comma(match.strHomeGoalDetails)
         txtHomeScore.text = match.intHomeScore
@@ -40,7 +37,6 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
         txtHomeSubtitles.text = DelimeterUtil.comma(match.strHomeLineupSubstitutes)
 
         //away
-        //imgAwayTeam
         txtAwayTeam.text = match.strAwayTeam
         txtAwayScorer.text = DelimeterUtil.comma(match.strAwayGoalDetails)
         txtAwayScore.text = match.intAwayScore
