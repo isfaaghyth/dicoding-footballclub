@@ -3,7 +3,7 @@ package isfaaghyth.app.fotballclub.ui.teamdetail
 import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
 import isfaaghyth.app.fotballclub.base.BasePresenter
-import isfaaghyth.app.fotballclub.data.local.FavoriteEntities
+import isfaaghyth.app.fotballclub.data.local.entities.FavoriteEntity
 import isfaaghyth.app.fotballclub.data.local.database
 import isfaaghyth.app.fotballclub.data.model.Team
 import org.jetbrains.anko.db.classParser
@@ -20,9 +20,9 @@ class TeamDetailPresenter(view: TeamDetailView) : BasePresenter<TeamDetailView>(
     init { super.attachView(view) }
 
     fun isFavorite(context: Context, id: String): Boolean {
-        var favorite: List<FavoriteEntities> = mutableListOf()
+        var favorite: List<FavoriteEntity> = mutableListOf()
         context.database.use {
-            val result = select(FavoriteEntities.TABLE_FAVORITE)
+            val result = select(FavoriteEntity.TABLE_FAVORITE)
                     .whereArgs("(TEAM_ID = {id})", "id" to id)
             favorite = result.parseList(classParser())
         }
@@ -31,10 +31,10 @@ class TeamDetailPresenter(view: TeamDetailView) : BasePresenter<TeamDetailView>(
 
     fun addToFavorite(context: Context, team: Team) = try {
         context.database.use {
-            insert(FavoriteEntities.TABLE_FAVORITE,
-                    FavoriteEntities.TEAM_ID to team.idTeam,
-                    FavoriteEntities.TEAM_NAME to team.strTeam,
-                    FavoriteEntities.TEAM_BADGE to team.strTeamBadge)
+            insert(FavoriteEntity.TABLE_FAVORITE,
+                    FavoriteEntity.TEAM_ID to team.idTeam,
+                    FavoriteEntity.TEAM_NAME to team.strTeam,
+                    FavoriteEntity.TEAM_BADGE to team.strTeamBadge)
         }
         view().onInfo("Added to Favorite")
     } catch (e: SQLiteConstraintException) {
@@ -43,7 +43,7 @@ class TeamDetailPresenter(view: TeamDetailView) : BasePresenter<TeamDetailView>(
 
     fun removeFromFavorite(context: Context, id: String) = try {
         context.database.use {
-            delete(FavoriteEntities.TABLE_FAVORITE, "(TEAM_ID = {id})", "id" to id)
+            delete(FavoriteEntity.TABLE_FAVORITE, "(TEAM_ID = {id})", "id" to id)
         }
         view().onInfo("Removed from Favorite")
     } catch (e: SQLiteConstraintException) {

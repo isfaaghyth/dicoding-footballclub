@@ -1,10 +1,10 @@
-package isfaaghyth.app.fotballclub.data.local
+package isfaaghyth.app.fotballclub.data.local.entities
 
 /**
  * Created by isfaaghyth on 9/20/18.
  * github: @isfaaghyth
  */
-data class FavoriteEntities(val id: Long?, val teamId: String?, val teamName: String?, val teamBadge: String?) {
+data class FavoriteEntity(val id: Long?, val teamId: String?, val teamName: String?, val teamBadge: String?) {
 
     companion object {
         const val TABLE_FAVORITE: String = "TABLE_FAVORITE"

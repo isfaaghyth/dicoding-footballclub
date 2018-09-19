@@ -1,5 +1,7 @@
 package isfaaghyth.app.fotballclub.ui.matchdetail
 
+import android.view.Menu
+import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import isfaaghyth.app.fotballclub.R
@@ -14,11 +16,28 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
     override fun contentView(): Int = R.layout.activity_match_detail
 
     private lateinit var match: Match
+    private var isFavorite: Boolean = false
 
     override fun onCreated() {
         showBackButton(true)
         match = intent.getSerializableExtra("match") as Match
         matchDetail(match)
+
+        isFavorite = presenter().isFavorite(this, match.idEvent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.favorite_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.mnFavorite -> {
+                presenter().addToFavorite(this, match)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun matchDetail(match: Match) {
