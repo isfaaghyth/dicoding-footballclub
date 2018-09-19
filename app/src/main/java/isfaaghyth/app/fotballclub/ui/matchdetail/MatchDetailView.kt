@@ -7,4 +7,5 @@ import isfaaghyth.app.fotballclub.base.BaseView
  * github: @isfaaghyth
  */
 interface MatchDetailView : BaseView {
+    fun getTeamsBadge(homeBadge: String, awayBadge: String)
 }

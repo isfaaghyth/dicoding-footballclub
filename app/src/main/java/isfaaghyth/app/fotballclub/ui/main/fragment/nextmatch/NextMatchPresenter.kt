@@ -23,7 +23,7 @@ class NextMatchPresenter(view: NextMatchView) : BasePresenter<NextMatchView>() {
                                 onFinishRequest()
                             }
                         },
-                        { error: Throwable -> this.catchError(error) }
+                        this::catchError
                 ))
     }
 

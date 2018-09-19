@@ -1,8 +1,12 @@
 package isfaaghyth.app.fotballclub.ui.matchdetail
 
+import android.util.Log
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.base.BaseActivity
 import isfaaghyth.app.fotballclub.data.model.Match
+import isfaaghyth.app.fotballclub.data.model.Team
 import isfaaghyth.app.fotballclub.utils.DelimeterUtil
 import kotlinx.android.synthetic.main.activity_match_detail.*
 
@@ -20,6 +24,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
     }
 
     fun matchDetail(match: Match) {
+        presenter().getTeamsBadge(match.idHomeTeam, match.idAwayTeam)
         txtDate.text = match.dateEvent
 
         //home
@@ -47,4 +52,15 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
         txtAwaySubtitles.text = DelimeterUtil.comma(match.strAwayLineupSubstitutes)
     }
 
+    override fun getTeamsBadge(homeBadge: String, awayBadge: String) {
+        Glide.with(applicationContext)
+                .load(homeBadge)
+                .apply(RequestOptions().placeholder(R.mipmap.ic_launcher_round))
+                .into(imgHomeTeam)
+
+        Glide.with(applicationContext)
+                .load(awayBadge)
+                .apply(RequestOptions().placeholder(R.mipmap.ic_launcher_round))
+                .into(imgAwayTeam)
+    }
 }
