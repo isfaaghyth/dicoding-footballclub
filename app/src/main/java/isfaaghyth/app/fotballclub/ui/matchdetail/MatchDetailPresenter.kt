@@ -46,17 +46,6 @@ class MatchDetailPresenter(view: MatchDetailView) : BasePresenter<MatchDetailVie
                         ))
     }
 
-
-    fun isFavorite(context: Context, id: String): Boolean {
-        var favorite: List<MatchEntity> = mutableListOf()
-        context.database.use {
-            val result = select(MatchEntity.TABLE_MATCH)
-                    .whereArgs("(EVENT_ID = {id})", "id" to id)
-            favorite = result.parseList(classParser())
-        }
-        return favorite.isEmpty()
-    }
-
     fun addToFavorite(context: Context, match: Match) = try {
         context.database.use {
             insert(MatchEntity.TABLE_MATCH,

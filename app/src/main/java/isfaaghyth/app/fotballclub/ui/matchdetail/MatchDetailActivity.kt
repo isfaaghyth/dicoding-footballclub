@@ -1,14 +1,19 @@
 package isfaaghyth.app.fotballclub.ui.matchdetail
 
+import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.base.BaseActivity
+import isfaaghyth.app.fotballclub.data.local.database
+import isfaaghyth.app.fotballclub.data.local.entities.MatchEntity
 import isfaaghyth.app.fotballclub.data.model.Match
 import isfaaghyth.app.fotballclub.utils.DelimeterUtil
 import kotlinx.android.synthetic.main.activity_match_detail.*
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.select
 
 class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailView {
 
@@ -17,24 +22,40 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
 
     private lateinit var match: Match
     private var isFavorite: Boolean = false
+    private var menuItem: Menu? = null
 
     override fun onCreated() {
-        showBackButton(true)
         match = intent.getSerializableExtra("match") as Match
+        favoriteState()
+        showBackButton(true)
         matchDetail(match)
+    }
 
-        isFavorite = presenter().isFavorite(this, match.idEvent)
+    private fun favoriteState() = database.use {
+        val result = select(MatchEntity.TABLE_MATCH)
+                .whereArgs("(EVENT_ID = {id})", "id" to match.idEvent)
+        val favorite = result.parseList(classParser<MatchEntity>())
+        if (!favorite.isEmpty()) isFavorite = true
+        setFavorite()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.favorite_menu, menu)
+        menuItem = menu
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.mnFavorite -> {
-                presenter().addToFavorite(this, match)
+                isFavorite = if (!isFavorite) {
+                    presenter().addToFavorite(this, match)
+                    !isFavorite
+                } else {
+                    presenter().removeFromFavorite(this, match.idEvent)
+                    !isFavorite
+                }
+                setFavorite()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -77,5 +98,11 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
                 .load(awayBadge)
                 .apply(RequestOptions().placeholder(R.mipmap.ic_launcher_round))
                 .into(imgAwayTeam)
+    }
+
+    private fun setFavorite() = if (isFavorite) {
+        menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.mipmap.ic_favorite)
+    } else {
+        menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.mipmap.ic_unfavorite)
     }
 }

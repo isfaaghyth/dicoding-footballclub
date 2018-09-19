@@ -22,4 +22,7 @@ interface Routes {
     @GET("api/v1/json/1/lookupteam.php")
     fun teamDetail(@Query("id") id: String) : Single<TeamRepository>
 
+    @GET("api/v1/json/1/lookupevent.php") //4328
+    fun getMatchById(@Query("id") id: String) : Single<MatchEvent>
+
 }

@@ -4,7 +4,7 @@ package isfaaghyth.app.fotballclub.data.local.entities
  * Created by isfaaghyth on 9/20/18.
  * github: @isfaaghyth
  */
-data class MatchEntity(val id: Long?, val teamId: String?, val teamName: String?, val teamBadge: String?) {
+data class MatchEntity(val id: Long?, val eventId: String?, val matchHomeId: String?, val matchAwayId: String?) {
 
     companion object {
         const val TABLE_MATCH: String = "TABLE_MATCH"

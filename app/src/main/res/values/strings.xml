@@ -1,19 +1,8 @@
 <resources>
     <string name="app_name">Football Club</string>
-
-    <string name="club_madrid">Real Madrid</string>
-    <string name="club_barcelona">Barcelona FC</string>
-    <string name="club_bayern">Bayern Munich</string>
-    <string name="club_chelsea">FC Chelsea</string>
-    <string name="club_juventus">Juventus</string>
-
-    <string name="madrid_desc">Real Madrid, is a professional football club based in Madrid, Spain. Founded on 6 March 1902 as the Madrid Football Club, the club has traditionally worn a white home kit since inception.</string>
-    <string name="barcelona_desc">Futbol Club Barcelona, known simply as Barcelona and colloquially as Barça, is a professional football club based in Barcelona, Catalonia, Spain.</string>
-    <string name="bayern_desc">FC Bayern München, FCB, Bayern Munich, or FC Bayern, is a German sports club based in Munich, Bavaria.</string>
-    <string name="chelsea_desc">Chelsea Football Club is a professional football club in London, England, that competes in the Premier League.</string>
-    <string name="juventus_desc">Juventus Football Club S.p.A., colloquially known as Juve, is a professional Italian football club in Turin, Piedmont.</string>
     <string name="matches">Matches</string>
+    <string name="favorite">Favorite</string>
     <string name="next_match">Next Match</string>
     <string name="prev_match">Prev Match</string>
-    <string name="favorite">Favorite</string>
+    <string name="fav_match">Fav Match</string>
 </resources>

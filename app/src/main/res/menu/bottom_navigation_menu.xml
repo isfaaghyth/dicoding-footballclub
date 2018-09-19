@@ -6,12 +6,20 @@
         android:enabled="true"
         android:title="@string/prev_match"
         android:icon="@mipmap/ic_flag"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/mnNextMatch"
         android:enabled="true"
         android:icon="@mipmap/ic_date"
         android:title="@string/next_match"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/mnFavMatch"
+        android:enabled="true"
+        android:icon="@mipmap/ic_favorite"
+        android:title="@string/fav_match"
+        app:showAsAction="always" />
+
 </menu>
