@@ -26,14 +26,12 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
 
     override fun onCreated() {
         match = intent.getSerializableExtra("match") as Match
-        favoriteState()
         showBackButton(true)
         matchDetail(match)
     }
 
     private fun favoriteState() = database.use {
-        val result = select(MatchEntity.TABLE_MATCH)
-                .whereArgs("(EVENT_ID = {id})", "id" to match.idEvent)
+        val result = select(MatchEntity.TABLE_MATCH).whereArgs("(EVENT_ID = {id})", "id" to match.idEvent)
         val favorite = result.parseList(classParser<MatchEntity>())
         if (!favorite.isEmpty()) isFavorite = true
         setFavorite()
@@ -42,6 +40,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.favorite_menu, menu)
         menuItem = menu
+        favoriteState()
         return super.onCreateOptionsMenu(menu)
     }
 

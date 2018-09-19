@@ -21,17 +21,25 @@ class FavMatchFragment : BaseFragment<FavMatchPresenter>(), FavMatchView {
     private var adapter = MatchAdapter(events)
 
     override fun onCreated() {
-        val data = presenter().getMatchFavorite(context())
-
         lstFavMatch.layoutManager = LinearLayoutManager(context())
         lstFavMatch.adapter = adapter
+        swipeRefresh.setOnRefreshListener { getFavoriteLocal() }
+        swipeRefresh.post({
+            swipeRefresh.isRefreshing = true
+            getFavoriteLocal()
+        })
+    }
 
+    private fun getFavoriteLocal() {
+        events.clear()
+        val data = presenter().getMatchFavorite(context())
         for (i in data) {
             presenter().getNextMatch(i.eventId.toString())
         }
     }
 
     override fun onMatchData(matches: MatchEvent) {
+        swipeRefresh.isRefreshing = false //TODO(harusnya masuk ke basePresenter)
         events.add(matches.events[0])
         adapter.notifyDataSetChanged()
     }
