@@ -13,7 +13,7 @@ class PrevMatchFragment : BaseFragment<PrevMatchPresenter>(), PrevMatchView {
     override fun contentView(): Int = R.layout.fragment_prev_match
 
     override fun onCreated() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
 }

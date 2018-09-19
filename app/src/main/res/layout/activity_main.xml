@@ -4,11 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="isfaaghyth.app.fotballclub.ui.main.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/lstFootball"
+    <isfaaghyth.app.fotballclub.utils.view.CustomViewPager
+        android:id="@+id/viewpagerMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomBarMain"/>
+
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBarMain"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="60dp"
+        android:background="#FFFFFF"
+        app:bb_inActiveTabColor="@android:color/darker_gray"
+        app:bb_tabXmlResource="@xml/bottombar"/>
 
 </RelativeLayout>

@@ -1,0 +1,10 @@
+<tabs>
+    <tab
+        id="@+id/tab_prev_match"
+        icon="@mipmap/ic_flag"
+        title="Previous Match" />
+    <tab
+        id="@+id/tab_next_match"
+        icon="@mipmap/ic_date"
+        title="Next Match" />
+</tabs>
