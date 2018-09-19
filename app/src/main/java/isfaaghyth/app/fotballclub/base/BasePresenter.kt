@@ -12,7 +12,7 @@ import java.net.SocketTimeoutException
  * Created by isfaaghyth on 9/19/18.
  * github: @isfaaghyth
  */
-open class BasePresenter<V: BaseView>() : BasePresenterImpl<V> {
+open class BasePresenter<V: BaseView> : BasePresenterImpl<V> {
 
     private lateinit var view: V
     private lateinit var routes: Routes
@@ -23,6 +23,8 @@ open class BasePresenter<V: BaseView>() : BasePresenterImpl<V> {
         view().showLoading()
         composite.add(disposable)
     }
+
+    fun getService(): Routes = routes
 
     override fun onFinishRequest() = view().hideLoading()
 
