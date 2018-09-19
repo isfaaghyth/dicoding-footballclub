@@ -1,5 +1,6 @@
 package isfaaghyth.app.fotballclub.network
 
+import io.reactivex.Flowable
 import io.reactivex.Single
 import isfaaghyth.app.fotballclub.data.model.Match
 import isfaaghyth.app.fotballclub.data.model.MatchEvent
@@ -23,6 +24,6 @@ interface Routes {
     fun teamDetail(@Query("id") id: String) : Single<TeamRepository>
 
     @GET("api/v1/json/1/lookupevent.php") //4328
-    fun getMatchById(@Query("id") id: String) : Single<MatchEvent>
+    fun getMatchById(@Query("id") id: String) : Flowable<MatchEvent>
 
 }

@@ -32,10 +32,7 @@ class FavMatchFragment : BaseFragment<FavMatchPresenter>(), FavMatchView {
 
     private fun getFavoriteLocal() {
         events.clear()
-        val data = presenter().getMatchFavorite(context())
-        for (i in data) {
-            presenter().getNextMatch(i.eventId.toString())
-        }
+        presenter().getNextMatch(context())
     }
 
     override fun onMatchData(matches: MatchEvent) {

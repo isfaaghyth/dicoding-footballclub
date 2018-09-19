@@ -1,6 +1,8 @@
 package isfaaghyth.app.fotballclub.ui.main.fragment.favmatch
 
 import android.content.Context
+import io.reactivex.Observable
+import io.reactivex.Single
 import isfaaghyth.app.fotballclub.base.BasePresenter
 import isfaaghyth.app.fotballclub.data.local.database
 import isfaaghyth.app.fotballclub.data.local.entities.MatchEntity
@@ -17,19 +19,21 @@ class FavMatchPresenter(view: FavMatchView) : BasePresenter<FavMatchView>() {
 
     init { super.attachView(view) }
 
-    fun getMatchFavorite(context: Context?) : List<MatchEntity> {
+    private fun getMatchFavorite(context: Context?) : Single<List<MatchEntity>> {
         lateinit var favoriteList : List<MatchEntity>
         context?.database?.use {
             val result = select(MatchEntity.TABLE_MATCH)
             val favorite = result.parseList(classParser<MatchEntity>())
             favoriteList = favorite
         }
-        return favoriteList
+        return Single.just(favoriteList)
     }
 
-    fun getNextMatch(eventId: String) {
+    fun getNextMatch(context: Context?) {
         view().showLoading()
-        subscribe(getService().getMatchById(eventId)
+        subscribe(getMatchFavorite(context)
+                .flattenAsFlowable{ it }
+                .flatMap({ getService().getMatchById(it.eventId.toString()) })
                 .compose(ScheduleUtils.set<MatchEvent>())
                 .subscribe(
                         { res ->
