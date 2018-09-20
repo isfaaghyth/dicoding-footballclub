@@ -3,6 +3,7 @@ package isfaaghyth.app.fotballclub.base
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.MenuItem
 import de.mateware.snacky.Snacky
 import isfaaghyth.app.fotballclub.utils.ConnectionUtils
@@ -45,9 +46,13 @@ abstract class BaseActivity<out P: BasePresenter<*>> : AppCompatActivity(), Base
         return super.onOptionsItemSelected(item)
     }
 
-    override fun showLoading() {}
+    override fun showLoading() {
+        Log.d("Football", "showLoading()")
+    }
 
-    override fun hideLoading() {}
+    override fun hideLoading() {
+        Log.d("Football", "hideLoading()")
+    }
 
     override fun onError(message: String?) = Snacky.builder()
             .setActivity(this)
@@ -71,6 +76,6 @@ abstract class BaseActivity<out P: BasePresenter<*>> : AppCompatActivity(), Base
 
     override fun hideKeyboard() = KeyboardUtils.hideSoftInput(this)
 
-    override fun context(): Context? = this
+    fun context(): Context? = this
 
 }

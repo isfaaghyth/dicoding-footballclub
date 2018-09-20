@@ -3,6 +3,7 @@ package isfaaghyth.app.fotballclub.base
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,9 +36,13 @@ abstract class BaseFragment<out P : BasePresenter<*>> : Fragment(), BaseView {
         presenter.dettachView()
     }
 
-    override fun showLoading() {}
+    override fun showLoading() {
+        Log.d("Football", "showLoading()")
+    }
 
-    override fun hideLoading() {}
+    override fun hideLoading() {
+        Log.d("Football", "hideLoading()")
+    }
 
     override fun onError(message: String?) = Snacky.builder()
             .setActivity(activity)
@@ -61,6 +66,6 @@ abstract class BaseFragment<out P : BasePresenter<*>> : Fragment(), BaseView {
 
     override fun hideKeyboard() = KeyboardUtils.hideSoftInput(activity)
 
-    override fun context(): Context? = context
+    fun context(): Context? = context
 
 }

@@ -1,6 +1,7 @@
 package isfaaghyth.app.fotballclub.ui.main.fragment.prevmatch
 
 import isfaaghyth.app.fotballclub.base.BaseView
+import isfaaghyth.app.fotballclub.data.model.Match
 import isfaaghyth.app.fotballclub.data.model.MatchEvent
 
 /**

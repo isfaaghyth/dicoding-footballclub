@@ -1,6 +1,5 @@
 package isfaaghyth.app.fotballclub.base
 
-import android.content.Context
 import android.support.annotation.StringRes
 
 /**
@@ -16,5 +15,4 @@ interface BaseView {
     fun onInfo(@StringRes resId: Int)
     fun isNetworkConnected(): Boolean?
     fun hideKeyboard()
-    fun context(): Context?
 }

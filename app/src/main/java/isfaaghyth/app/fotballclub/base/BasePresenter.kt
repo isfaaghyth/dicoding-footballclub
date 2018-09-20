@@ -25,7 +25,9 @@ open class BasePresenter<V: BaseView> : BasePresenterImpl<V> {
 
     fun getService(): Routes = routes
 
-    override fun onFinishRequest() = view().hideLoading()
+    override fun onFinishRequest() {
+        view().hideLoading()
+    }
 
     override fun catchError(error: Throwable) = try {
         view().hideLoading()
