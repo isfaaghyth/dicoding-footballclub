@@ -1,9 +1,12 @@
 package isfaaghyth.app.fotballclub.base
 
+import android.util.Log
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import isfaaghyth.app.fotballclub.network.Network
 import isfaaghyth.app.fotballclub.network.Routes
+import isfaaghyth.app.fotballclub.utils.reactive.AppSchedulerProvider
+import isfaaghyth.app.fotballclub.utils.reactive.SchedulerProvider
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
@@ -30,6 +33,7 @@ open class BasePresenter<V: BaseView> : BasePresenterImpl<V> {
     }
 
     override fun catchError(error: Throwable) = try {
+        Log.e("TAG", error.message)
         view().hideLoading()
         when (error) {
             is HttpException -> view().onError(error.message())

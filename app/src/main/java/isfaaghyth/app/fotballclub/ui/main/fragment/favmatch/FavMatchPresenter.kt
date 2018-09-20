@@ -1,13 +1,11 @@
 package isfaaghyth.app.fotballclub.ui.main.fragment.favmatch
 
 import android.content.Context
-import io.reactivex.Observable
 import io.reactivex.Single
 import isfaaghyth.app.fotballclub.base.BasePresenter
 import isfaaghyth.app.fotballclub.data.local.database
 import isfaaghyth.app.fotballclub.data.local.entities.MatchEntity
-import isfaaghyth.app.fotballclub.data.model.MatchEvent
-import isfaaghyth.app.fotballclub.utils.reactive.ScheduleUtils
+import isfaaghyth.app.fotballclub.utils.reactive.SchedulerProvider
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 
@@ -15,7 +13,8 @@ import org.jetbrains.anko.db.select
  * Created by isfaaghyth on 9/20/18.
  * github: @isfaaghyth
  */
-class FavMatchPresenter(view: FavMatchView) : BasePresenter<FavMatchView>() {
+class FavMatchPresenter(val view: FavMatchView, private val subscriber: SchedulerProvider)
+    : BasePresenter<FavMatchView>() {
 
     init { super.attachView(view) }
 
@@ -34,7 +33,8 @@ class FavMatchPresenter(view: FavMatchView) : BasePresenter<FavMatchView>() {
         subscribe(getMatchFavorite(context)
                 .flattenAsFlowable{ it }
                 .flatMap({ getService().getMatchById(it.eventId.toString()) })
-                .compose(ScheduleUtils.set<MatchEvent>())
+                .observeOn(subscriber.ui())
+                .subscribeOn(subscriber.io())
                 .subscribe(
                         { res ->
                             run {

@@ -1,15 +1,11 @@
 package isfaaghyth.app.fotballclub.ui.main.fragment.prevmatch
 
 import io.reactivex.Single
-import io.reactivex.functions.Consumer
 import isfaaghyth.app.fotballclub.base.BaseView
 import isfaaghyth.app.fotballclub.data.model.MatchEvent
 import isfaaghyth.app.fotballclub.network.Routes
-import isfaaghyth.app.fotballclub.utils.reactive.MainScheduler
-import isfaaghyth.app.fotballclub.utils.test.SchedulerProvider
-import isfaaghyth.app.fotballclub.utils.test.TestSchedulerProvider
+import isfaaghyth.app.fotballclub.utils.reactive.TestSchedulerProvider
 import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Test
 
 import org.junit.Before
@@ -34,7 +30,7 @@ class PrevMatchPresenterTest {
 
     private lateinit var presenter: PrevMatchPresenter
 
-    private lateinit var scheduler: SchedulerProvider
+    private lateinit var scheduler: TestSchedulerProvider
 
     @Mock
     private lateinit var matches: MatchEvent
@@ -46,7 +42,7 @@ class PrevMatchPresenterTest {
         MockitoAnnotations.initMocks(this)
         scheduler = TestSchedulerProvider()
         singleMatches = Single.just(matches)
-        presenter = PrevMatchPresenter(view)
+        presenter = PrevMatchPresenter(view, scheduler)
         `when`(routes.prevMatch("4328")).thenReturn(singleMatches)
     }
 

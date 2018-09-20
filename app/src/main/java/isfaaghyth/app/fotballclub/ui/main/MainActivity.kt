@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewPagerMain() {
-        viewpagerMain.setPagingEnabled(false)
+        viewpagerMain.setPagingEnabled(true)
         viewpagerMain.offscreenPageLimit = 3
 
         val adapter = ViewPagerAdapter(supportFragmentManager)

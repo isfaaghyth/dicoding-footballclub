@@ -5,6 +5,7 @@ import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.base.BaseFragment
 import isfaaghyth.app.fotballclub.data.model.MatchEvent
 import isfaaghyth.app.fotballclub.ui.adapter.MatchAdapter
+import isfaaghyth.app.fotballclub.utils.reactive.AppSchedulerProvider
 import kotlinx.android.synthetic.main.fragment_next_match.*
 
 /**
@@ -13,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_next_match.*
  */
 class NextMatchFragment : BaseFragment<NextMatchPresenter>(), NextMatchView {
 
-    override fun presenter(): NextMatchPresenter = NextMatchPresenter(this)
+    override fun presenter(): NextMatchPresenter = NextMatchPresenter(this, AppSchedulerProvider())
     override fun contentView(): Int = R.layout.fragment_next_match
 
     override fun onCreated() {

@@ -6,6 +6,7 @@ import isfaaghyth.app.fotballclub.base.BaseFragment
 import isfaaghyth.app.fotballclub.data.model.Match
 import isfaaghyth.app.fotballclub.data.model.MatchEvent
 import isfaaghyth.app.fotballclub.ui.adapter.MatchAdapter
+import isfaaghyth.app.fotballclub.utils.reactive.AppSchedulerProvider
 import kotlinx.android.synthetic.main.fragment_fav_match.*
 
 /**
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_fav_match.*
  */
 class FavMatchFragment : BaseFragment<FavMatchPresenter>(), FavMatchView {
 
-    override fun presenter(): FavMatchPresenter = FavMatchPresenter(this)
+    override fun presenter(): FavMatchPresenter = FavMatchPresenter(this, AppSchedulerProvider())
     override fun contentView(): Int = R.layout.fragment_fav_match
 
     private var events : MutableList<Match> = mutableListOf()

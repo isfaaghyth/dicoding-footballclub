@@ -1,4 +1,4 @@
-package isfaaghyth.app.fotballclub.utils.test
+package isfaaghyth.app.fotballclub.utils.reactive
 
 import io.reactivex.Scheduler
 

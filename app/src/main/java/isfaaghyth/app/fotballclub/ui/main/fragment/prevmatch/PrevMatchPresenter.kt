@@ -1,19 +1,14 @@
 package isfaaghyth.app.fotballclub.ui.main.fragment.prevmatch
 
-import android.util.Log
 import isfaaghyth.app.fotballclub.base.BasePresenter
-import isfaaghyth.app.fotballclub.data.model.MatchEvent
-import isfaaghyth.app.fotballclub.utils.reactive.ScheduleUtils
-import isfaaghyth.app.fotballclub.utils.test.SchedulerProvider
-import isfaaghyth.app.fotballclub.utils.test.TestSchedulerProvider
+import isfaaghyth.app.fotballclub.utils.reactive.SchedulerProvider
 
 /**
  * Created by isfaaghyth on 9/19/18.
  * github: @isfaaghyth
  */
-open class PrevMatchPresenter(view: PrevMatchView) : BasePresenter<PrevMatchView>() {
-
-    private var schedule = TestSchedulerProvider()
+open class PrevMatchPresenter(val view: PrevMatchView, private val scheduler: SchedulerProvider)
+    : BasePresenter<PrevMatchView>() {
 
     init {
         super.attachView(view)
@@ -22,8 +17,8 @@ open class PrevMatchPresenter(view: PrevMatchView) : BasePresenter<PrevMatchView
     fun getPrevMatch() {
         view().showLoading()
         subscribe(getService().prevMatch("4328")
-                .observeOn(schedule.ui())
-                .subscribeOn(schedule.io())
+                .observeOn(scheduler.ui())
+                .subscribeOn(scheduler.io())
                 .subscribe(
                         { res ->
                             run {
