@@ -17,7 +17,7 @@ open class PrevMatchPresenter(val view: PrevMatchView, private val scheduler: Sc
     fun getPrevMatch() {
         view().showLoading()
         subscribe(getService().prevMatch("4328")
-                .observeOn(scheduler.ui())
+                .observeOn(scheduler.mainThread())
                 .subscribeOn(scheduler.io())
                 .subscribe(
                         { res ->

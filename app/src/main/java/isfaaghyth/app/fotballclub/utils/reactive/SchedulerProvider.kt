@@ -7,7 +7,7 @@ import io.reactivex.Scheduler
  * github: @isfaaghyth
  */
 interface SchedulerProvider {
-    fun ui(): Scheduler
+    fun mainThread(): Scheduler
     fun computation(): Scheduler
     fun trampoline(): Scheduler
     fun newThread(): Scheduler

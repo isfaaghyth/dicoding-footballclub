@@ -8,7 +8,7 @@ import io.reactivex.schedulers.Schedulers
  * github: @isfaaghyth
  */
 class TestSchedulerProvider: SchedulerProvider {
-    override fun ui(): Scheduler = Schedulers.trampoline()
+    override fun mainThread(): Scheduler = Schedulers.trampoline()
     override fun computation(): Scheduler = Schedulers.trampoline()
     override fun trampoline(): Scheduler = Schedulers.trampoline()
     override fun newThread(): Scheduler = Schedulers.trampoline()

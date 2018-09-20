@@ -33,7 +33,7 @@ class FavMatchPresenter(val view: FavMatchView, private val subscriber: Schedule
         subscribe(getMatchFavorite(context)
                 .flattenAsFlowable{ it }
                 .flatMap({ getService().getMatchById(it.eventId.toString()) })
-                .observeOn(subscriber.ui())
+                .observeOn(subscriber.mainThread())
                 .subscribeOn(subscriber.io())
                 .subscribe(
                         { res ->

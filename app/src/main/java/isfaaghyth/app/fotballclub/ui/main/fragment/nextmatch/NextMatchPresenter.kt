@@ -15,7 +15,7 @@ class NextMatchPresenter(val view: NextMatchView, private val subscriber: Schedu
     fun getNextMatch() {
         view().showLoading()
         subscribe(getService().nextMatch("4328")
-                .observeOn(subscriber.ui())
+                .observeOn(subscriber.mainThread())
                 .subscribeOn(subscriber.io())
                 .subscribe(
                         { res ->
