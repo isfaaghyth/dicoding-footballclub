@@ -2,10 +2,7 @@ package isfaaghyth.app.fotballclub.network
 
 import io.reactivex.Flowable
 import io.reactivex.Single
-import isfaaghyth.app.fotballclub.data.model.Leagues
-import isfaaghyth.app.fotballclub.data.model.MatchEvent
-import isfaaghyth.app.fotballclub.data.model.Players
-import isfaaghyth.app.fotballclub.data.model.Teams
+import isfaaghyth.app.fotballclub.data.model.*
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -38,5 +35,11 @@ interface Routes {
 
     @GET("api/v1/json/1/lookup_all_players.php")
     fun getPlayersByTeam(@Query("id") teamId: String) : Flowable<Players>
+
+    @GET("api/v1/json/1/searchteams.php")
+    fun searchTeamByName(@Query("t") teamName: String) : Single<Teams>
+
+    @GET("api/v1/json/1/searchevents.php")
+    fun searchMatchByTeam(@Query("e") teamName: String) : Single<Events>
 
 }

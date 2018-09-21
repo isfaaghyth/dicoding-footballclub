@@ -15,6 +15,8 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import android.Manifest.permission
 import android.Manifest.permission.RECORD_AUDIO
 import android.Manifest.permission.READ_CONTACTS
+import android.view.Menu
+import android.view.MenuItem
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.listener.PermissionRequest
 import isfaaghyth.app.fotballclub.ui.main.fragment.favorites.FavoritesFragment
@@ -38,6 +40,11 @@ class MainActivity : AppCompatActivity() {
             override fun onPermissionsChecked(report: MultiplePermissionsReport?) = Unit
             override fun onPermissionRationaleShouldBeShown(permissions: MutableList<PermissionRequest>?, token: PermissionToken?) = Unit
         }).check()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.search_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     private fun setupViewPagerMain() {

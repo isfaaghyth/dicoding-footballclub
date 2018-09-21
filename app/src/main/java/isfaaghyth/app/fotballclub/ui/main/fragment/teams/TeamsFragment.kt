@@ -1,6 +1,8 @@
 package isfaaghyth.app.fotballclub.ui.main.fragment.teams
 
 import android.support.v7.widget.GridLayoutManager
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.base.BaseFragment
@@ -11,8 +13,10 @@ import isfaaghyth.app.fotballclub.utils.reactive.AppSchedulerProvider
 import kotlinx.android.synthetic.main.fragment_teams.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.SearchView
 import android.widget.Spinner
-
+import isfaaghyth.app.fotballclub.ui.search.team.TeamActivity
+import org.jetbrains.anko.*
 
 /**
  * Created by isfaaghyth on 9/21/18.
@@ -25,8 +29,21 @@ class TeamsFragment : BaseFragment<TeamsPresenter>(), TeamsView {
     override fun contentView(): Int = R.layout.fragment_teams
 
     override fun onCreated() {
+        setHasOptionsMenu(true)
         lstTeams.layoutManager = GridLayoutManager(context(), 3)
         presenter().getLeagues()
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?) {
+        val searchView = menu?.findItem(R.id.mnSearch)?.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                activity?.startActivity<TeamActivity>("query" to query)
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean = false
+        })
+        super.onPrepareOptionsMenu(menu)
     }
 
     override fun onTeamsData(team: Teams) {
