@@ -9,6 +9,6 @@ import isfaaghyth.app.fotballclub.data.model.Teams
  * github: @isfaaghyth
  */
 interface TeamsView : BaseView {
-    fun onTeamsData(team: Teams)
+    fun onTeamsData(team: Teams?)
     fun onAllLeagues(leagues: Leagues)
 }

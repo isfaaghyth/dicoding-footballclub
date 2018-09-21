@@ -1,5 +1,6 @@
 package isfaaghyth.app.fotballclub.ui.main.fragment.favteam
 
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.base.BaseFragment
@@ -24,7 +25,7 @@ class FavTeamFragment : BaseFragment<FavTeamPresenter>(), FavTeamView {
     private var adapter = TeamAdapter(teams)
 
     override fun onCreated() {
-        lstFavPlayer.layoutManager = LinearLayoutManager(context())
+        lstFavPlayer.layoutManager = GridLayoutManager(context(), 3)
         lstFavPlayer.adapter = adapter
         swipeRefresh.setOnRefreshListener { getFavoriteLocal() }
         swipeRefresh.post({

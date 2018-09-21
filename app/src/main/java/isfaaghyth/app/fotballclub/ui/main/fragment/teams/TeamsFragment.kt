@@ -55,8 +55,11 @@ class TeamsFragment : BaseFragment<TeamsPresenter>(), TeamsView {
         super.onCreateOptionsMenu(  menu, inflater)
     }
 
-    override fun onTeamsData(team: Teams) {
-        if (team.teams.isEmpty()) return
+    override fun onTeamsData(team: Teams?) {
+        if (team?.teams == null) {
+            onInfo(R.string.not_found)
+            return
+        }
         lstTeams.adapter = TeamAdapter(team.teams)
     }
 
