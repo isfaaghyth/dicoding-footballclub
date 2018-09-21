@@ -17,6 +17,7 @@ import android.Manifest.permission.RECORD_AUDIO
 import android.Manifest.permission.READ_CONTACTS
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.listener.PermissionRequest
+import isfaaghyth.app.fotballclub.ui.main.fragment.favorites.FavoritesFragment
 import isfaaghyth.app.fotballclub.ui.main.fragment.teams.TeamsFragment
 
 
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(MatchesFragment(), "Matches")
         adapter.addFragment(TeamsFragment(), "Teams")
-        adapter.addFragment(FavMatchFragment(), "Fav Match")
+        adapter.addFragment(FavoritesFragment(), "Favorites")
         viewpagerMain.adapter = adapter
     }
 

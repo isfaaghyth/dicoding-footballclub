@@ -34,6 +34,7 @@ class FavMatchFragment : BaseFragment<FavMatchPresenter>(), FavMatchView {
     private fun getFavoriteLocal() {
         events.clear()
         presenter().getNextMatch(context())
+        swipeRefresh.isRefreshing = false
     }
 
     override fun onMatchData(matches: MatchEvent) {

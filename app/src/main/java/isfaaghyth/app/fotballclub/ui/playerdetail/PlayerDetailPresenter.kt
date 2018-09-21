@@ -9,4 +9,7 @@ import isfaaghyth.app.fotballclub.utils.reactive.SchedulerProvider
  */
 class PlayerDetailPresenter(val view: PlayerDetailView, val scheduler: SchedulerProvider)
     : BasePresenter<PlayerDetailView>() {
+
+    init { super.attachView(view) }
+
 }

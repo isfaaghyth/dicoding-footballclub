@@ -30,6 +30,9 @@ interface Routes {
     @GET("api/v1/json/1/search_all_teams.php")
     fun getTeamByLeague(@Query("l") league: String) : Flowable<Teams>
 
+    @GET("api/v1/json/1/lookupteam.php")
+    fun getTeamById(@Query("id") teamId: String) : Flowable<Teams>
+
     @GET("api/v1/json/1/all_leagues.php")
     fun getAllLeagues() : Single<Leagues>
 
