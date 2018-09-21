@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupViewPagerMain()
         onBottomBarSelected()
-        bottomBarMain.selectedItemId = R.id.mnPrevMatch
+        bottomBarMain.selectedItemId = R.id.mnMatches
 
         Dexter.withActivity(this)
                 .withPermissions(
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewPagerMain() {
-        viewpagerMain.setPagingEnabled(true)
+        viewpagerMain.setPagingEnabled(false)
         viewpagerMain.offscreenPageLimit = 3
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
