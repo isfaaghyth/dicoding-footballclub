@@ -17,7 +17,16 @@ class TeamsPresenter(view: TeamsView, private val subscriber: SchedulerProvider)
                 .subscribeOn(subscriber.io())
                 .subscribe({
                     res -> view().onTeamsData(res)
-                }))
+                }, this::catchError))
+    }
+
+    fun getLeagues() {
+        subscribe(getService().getAllLeagues()
+                .observeOn(subscriber.mainThread())
+                .subscribeOn(subscriber.io())
+                .subscribe({
+                    res -> view().onAllLeagues(res)
+                }, this::catchError))
     }
 
 }

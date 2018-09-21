@@ -5,4 +5,5 @@
     <string name="next_match">Next Match</string>
     <string name="prev_match">Prev Match</string>
     <string name="fav_match">Fav Match</string>
+    <string name="teams">Teams</string>
 </resources>

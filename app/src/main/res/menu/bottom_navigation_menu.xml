@@ -4,7 +4,7 @@
     <item
         android:id="@+id/mnMatches"
         android:enabled="true"
-        android:title="@string/prev_match"
+        android:title="@string/matches"
         android:icon="@mipmap/ic_flag"
         app:showAsAction="always"/>
 
@@ -12,14 +12,14 @@
         android:id="@+id/mnTeams"
         android:enabled="true"
         android:icon="@mipmap/ic_teams"
-        android:title="@string/next_match"
+        android:title="@string/teams"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/mnFavMatch"
         android:enabled="true"
         android:icon="@mipmap/ic_favorite"
-        android:title="@string/fav_match"
+        android:title="@string/favorite"
         app:showAsAction="always" />
 
 </menu>

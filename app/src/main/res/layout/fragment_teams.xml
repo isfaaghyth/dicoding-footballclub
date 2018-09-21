@@ -4,8 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Spinner
+        android:id="@+id/spinnerLeagues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lstTeams"
+        android:layout_below="@+id/spinnerLeagues"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
