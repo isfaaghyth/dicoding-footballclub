@@ -2,8 +2,9 @@ package isfaaghyth.app.fotballclub.network
 
 import io.reactivex.Flowable
 import io.reactivex.Single
+import isfaaghyth.app.fotballclub.data.model.Leagues
 import isfaaghyth.app.fotballclub.data.model.MatchEvent
-import isfaaghyth.app.fotballclub.data.model.TeamRepository
+import isfaaghyth.app.fotballclub.data.model.Teams
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -20,12 +21,15 @@ interface Routes {
     fun nextMatch(@Query("id") id: String) : Single<MatchEvent>
 
     @GET("api/v1/json/1/lookupteam.php")
-    fun teamDetail(@Query("id") id: String) : Single<TeamRepository>
+    fun teamDetail(@Query("id") id: String) : Single<Teams>
 
     @GET("api/v1/json/1/lookupevent.php") //4328
     fun getMatchById(@Query("id") id: String) : Flowable<MatchEvent>
 
     @GET("api/v1/json/1/search_all_teams.php")
-    fun getTeamByLeague(@Query("l") league: String) : Flowable<TeamRepository>
+    fun getTeamByLeague(@Query("l") league: String) : Flowable<Teams>
+
+    @GET("api/v1/json/1/all_leagues.php")
+    fun getAllLeagues() : Single<Leagues>
 
 }

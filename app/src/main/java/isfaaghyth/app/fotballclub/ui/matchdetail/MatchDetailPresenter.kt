@@ -10,11 +10,9 @@ import isfaaghyth.app.fotballclub.base.BasePresenter
 import isfaaghyth.app.fotballclub.data.local.database
 import isfaaghyth.app.fotballclub.data.local.entities.MatchEntity
 import isfaaghyth.app.fotballclub.data.model.Match
-import isfaaghyth.app.fotballclub.data.model.TeamRepository
-import org.jetbrains.anko.db.classParser
+import isfaaghyth.app.fotballclub.data.model.Teams
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.delete
-import org.jetbrains.anko.db.select
 
 /**
  * Created by isfaaghyth on 9/19/18.
@@ -30,7 +28,7 @@ class MatchDetailPresenter(view: MatchDetailView) : BasePresenter<MatchDetailVie
                 Single.zip(
                         getService().teamDetail(homeTeam),
                         getService().teamDetail(awayTeam),
-                        BiFunction<TeamRepository, TeamRepository, List<String>> { t1, t2 ->
+                        BiFunction<Teams, Teams, List<String>> { t1, t2 ->
                             listOf(t1.teams[0].strTeamBadge, t2.teams[0].strTeamBadge)
                         })
                         .subscribeOn(Schedulers.io())
