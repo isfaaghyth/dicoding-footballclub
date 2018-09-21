@@ -1,5 +1,6 @@
 package isfaaghyth.app.fotballclub.ui.main.fragment.teams
 
+import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,10 +14,8 @@ import isfaaghyth.app.fotballclub.utils.reactive.AppSchedulerProvider
 import kotlinx.android.synthetic.main.fragment_teams.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SearchView
+import android.support.v7.widget.SearchView
 import android.widget.Spinner
-import isfaaghyth.app.fotballclub.ui.search.team.TeamActivity
-import org.jetbrains.anko.*
 
 /**
  * Created by isfaaghyth on 9/21/18.
@@ -28,25 +27,36 @@ class TeamsFragment : BaseFragment<TeamsPresenter>(), TeamsView {
 
     override fun contentView(): Int = R.layout.fragment_teams
 
-    override fun onCreated() {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
+    }
+
+    override fun onCreated() {
         lstTeams.layoutManager = GridLayoutManager(context(), 3)
         presenter().getLeagues()
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?) {
-        val searchView = menu?.findItem(R.id.mnSearch)?.actionView as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.search_menu, menu)
+        val searchView = menu?.findItem(R.id.mnSearch)?.actionView as SearchView?
+        searchView?.queryHint = "Search Team"
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                activity?.startActivity<TeamActivity>("query" to query)
+                presenter().searchTeamByName(query.toString())
                 return true
             }
             override fun onQueryTextChange(newText: String?): Boolean = false
         })
-        super.onPrepareOptionsMenu(menu)
+        searchView?.setOnCloseListener {
+            presenter().getLeagues()
+            true
+        }
+        super.onCreateOptionsMenu(  menu, inflater)
     }
 
     override fun onTeamsData(team: Teams) {
+        if (team.teams.isEmpty()) return
         lstTeams.adapter = TeamAdapter(team.teams)
     }
 

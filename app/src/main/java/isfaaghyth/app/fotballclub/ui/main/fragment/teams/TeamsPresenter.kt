@@ -29,4 +29,13 @@ class TeamsPresenter(view: TeamsView, private val subscriber: SchedulerProvider)
                 }, this::catchError))
     }
 
+    fun searchTeamByName(teamName: String) {
+        subscribe(getService().searchTeamByName(teamName)
+                .observeOn(subscriber.mainThread())
+                .subscribeOn(subscriber.io())
+                .subscribe({
+                    res -> view().onTeamsData(res)
+                }, this::catchError))
+    }
+
 }

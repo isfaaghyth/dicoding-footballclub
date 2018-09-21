@@ -5,7 +5,6 @@ import android.util.Log
 import com.google.gson.Gson
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.base.BaseFragment
-import isfaaghyth.app.fotballclub.data.model.Match
 import isfaaghyth.app.fotballclub.data.model.MatchEvent
 import isfaaghyth.app.fotballclub.ui.adapter.MatchAdapter
 import isfaaghyth.app.fotballclub.utils.reactive.AppSchedulerProvider

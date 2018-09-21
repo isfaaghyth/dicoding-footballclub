@@ -1,4 +1,4 @@
-package isfaaghyth.app.fotballclub.ui.search.match
+package isfaaghyth.app.fotballclub.ui.searchmatch
 
 import android.support.v7.widget.LinearLayoutManager
 import isfaaghyth.app.fotballclub.R
@@ -12,13 +12,14 @@ import kotlinx.android.synthetic.main.activity_search_match.*
  * Created by isfaaghyth on 9/21/18.
  * github: @isfaaghyth
  */
-class MatchActivity : BaseActivity<MatchPresenter>(), MatchView {
+class SearchMatchActivity : BaseActivity<MatchPresenter>(), SearchMatchView {
 
     override fun presenter(): MatchPresenter = MatchPresenter(this, AppSchedulerProvider())
     override fun contentView(): Int = R.layout.activity_search_match
 
     override fun onCreated() {
-        val querySearch = intent.getStringExtra("search")
+        showBackButton(true)
+        val querySearch = intent.getStringExtra("query")
         lstMatches.layoutManager = LinearLayoutManager(this)
         presenter().searchMatchByTeam(querySearch)
     }
