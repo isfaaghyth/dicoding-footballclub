@@ -22,7 +22,7 @@ class PrevMatchFragment : BaseFragment<PrevMatchPresenter>(), PrevMatchView {
 
     override fun onCreated() {
         lstPrevMatch.layoutManager = LinearLayoutManager(context())
-        presenter().getPrevMatch()
+        presenter().getPrevMatch("4328")
     }
 
     override fun onPrevMatchData(matches: MatchEvent) {

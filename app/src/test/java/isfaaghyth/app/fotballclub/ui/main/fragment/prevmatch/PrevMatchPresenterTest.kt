@@ -49,7 +49,7 @@ class PrevMatchPresenterTest {
     @Test
     fun getPrevMatch() {
         launch { verify(view).showLoading() }
-        presenter.getPrevMatch()
+        presenter.getPrevMatch("4328")
         launch { verify(view).onPrevMatchData(matches) }
         launch { verify(view).hideLoading() }
     }

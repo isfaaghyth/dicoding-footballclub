@@ -14,9 +14,9 @@ open class PrevMatchPresenter(val view: PrevMatchView, private val scheduler: Sc
         super.attachView(view)
     }
 
-    fun getPrevMatch() {
+    fun getPrevMatch(id: String) {
         view().showLoading()
-        subscribe(getService().prevMatch("4328")
+        subscribe(getService().prevMatch(id)
                 .observeOn(scheduler.mainThread())
                 .subscribeOn(scheduler.io())
                 .subscribe(
