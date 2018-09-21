@@ -17,6 +17,7 @@ import android.Manifest.permission.RECORD_AUDIO
 import android.Manifest.permission.READ_CONTACTS
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.listener.PermissionRequest
+import isfaaghyth.app.fotballclub.ui.main.fragment.teams.TeamsFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,15 +45,15 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(MatchesFragment(), "Matches")
-        adapter.addFragment(NextMatchFragment(), "Next Match")
+        adapter.addFragment(TeamsFragment(), "Teams")
         adapter.addFragment(FavMatchFragment(), "Fav Match")
         viewpagerMain.adapter = adapter
     }
 
     private fun onBottomBarSelected() = bottomBarMain.setOnNavigationItemSelectedListener { item ->
         when(item.itemId) {
-            R.id.mnPrevMatch -> viewpagerMain.currentItem = 0
-            R.id.mnNextMatch -> viewpagerMain.currentItem = 1
+            R.id.mnMatches -> viewpagerMain.currentItem = 0
+            R.id.mnTeams -> viewpagerMain.currentItem = 1
             R.id.mnFavMatch -> viewpagerMain.currentItem = 2
         }
         true
