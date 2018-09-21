@@ -4,6 +4,7 @@ import io.reactivex.Flowable
 import io.reactivex.Single
 import isfaaghyth.app.fotballclub.data.model.Leagues
 import isfaaghyth.app.fotballclub.data.model.MatchEvent
+import isfaaghyth.app.fotballclub.data.model.Players
 import isfaaghyth.app.fotballclub.data.model.Teams
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -31,5 +32,8 @@ interface Routes {
 
     @GET("api/v1/json/1/all_leagues.php")
     fun getAllLeagues() : Single<Leagues>
+
+    @GET("api/v1/json/1/lookup_all_players.php")
+    fun getPlayersByTeam(@Query("teamId") teamId: String) : Flowable<Players>
 
 }

@@ -19,7 +19,7 @@
         android:id="@+id/mnFavMatch"
         android:enabled="true"
         android:icon="@mipmap/ic_favorite"
-        android:title="@string/favorite"
+        android:title="@string/team"
         app:showAsAction="always" />
 
 </menu>

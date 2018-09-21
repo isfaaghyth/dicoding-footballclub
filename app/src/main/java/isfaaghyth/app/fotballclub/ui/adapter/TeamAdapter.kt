@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.data.model.Team
+import isfaaghyth.app.fotballclub.ui.teamdetail.TeamDetailActivity
 import kotlinx.android.synthetic.main.item_team.view.*
+import org.jetbrains.anko.*
 
 /**
  * Created by isfaaghyth on 9/21/18.
@@ -21,7 +23,7 @@ class TeamAdapter(private val teams: List<Team>) : RecyclerView.Adapter<TeamAdap
         val viewHolder = Holder(LayoutInflater.from(parent?.context).inflate(R.layout.item_team, parent, false))
         viewHolder.itemView.setOnClickListener {
             val position = viewHolder.adapterPosition
-            //parent?.context?.startActivity<MatchDetailActivity>("match" to matches[position])
+            parent?.context?.startActivity<TeamDetailActivity>("team" to teams[position])
         }
         return viewHolder
     }

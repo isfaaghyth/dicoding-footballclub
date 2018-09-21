@@ -22,7 +22,7 @@
             android:background="@android:color/white">
 
             <ImageView
-                android:id="@+id/imgTeam"
+                android:id="@+id/imgPlayer"
                 android:layout_width="140dp"
                 android:layout_height="120dp"
                 android:background="@drawable/shadow"
@@ -30,10 +30,10 @@
                 android:src="@mipmap/ic_launcher_round"/>
 
             <TextView
-                android:id="@+id/txtTeamName"
+                android:id="@+id/txtPlayerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Real Madrid"
+                tools:text="Ronaldo"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textSize="14sp"
