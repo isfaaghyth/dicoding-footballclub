@@ -1,13 +1,10 @@
 package isfaaghyth.app.fotballclub.ui.main.fragment.favteam
 
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.base.BaseFragment
-import isfaaghyth.app.fotballclub.data.model.Player
 import isfaaghyth.app.fotballclub.data.model.Team
 import isfaaghyth.app.fotballclub.data.model.Teams
-import isfaaghyth.app.fotballclub.ui.adapter.PlayerAdapter
 import isfaaghyth.app.fotballclub.ui.adapter.TeamAdapter
 import isfaaghyth.app.fotballclub.utils.reactive.AppSchedulerProvider
 import kotlinx.android.synthetic.main.fragment_fav_player.*
@@ -28,10 +25,10 @@ class FavTeamFragment : BaseFragment<FavTeamPresenter>(), FavTeamView {
         lstFavPlayer.layoutManager = GridLayoutManager(context(), 3)
         lstFavPlayer.adapter = adapter
         swipeRefresh.setOnRefreshListener { getFavoriteLocal() }
-        swipeRefresh.post({
+        swipeRefresh.post {
             swipeRefresh.isRefreshing = true
             getFavoriteLocal()
-        })
+        }
     }
 
     private fun getFavoriteLocal() {
@@ -40,9 +37,9 @@ class FavTeamFragment : BaseFragment<FavTeamPresenter>(), FavTeamView {
         swipeRefresh.isRefreshing = false
     }
 
-    override fun getTeam(teams_: Teams) {
+    override fun getTeam(team: Teams) {
         swipeRefresh.isRefreshing = false //TODO(harusnya masuk ke basePresenter)
-        teams.add(teams_.teams[0])
+        teams.add(team.teams[0])
         adapter.notifyDataSetChanged()
     }
 

@@ -48,11 +48,11 @@ class MatchAdapter(private var matches: List<Match>): RecyclerView.Adapter<Match
                 val awayScore: Int? = match.intAwayScore?.toInt() ?: 0
                 txtHomeTeam?.text = "${match.strHomeTeam} ($homeScore)"
                 txtAwayTeam?.text = "${match.strAwayTeam} ($awayScore)"
+                btnAddReminder?.visibility = View.GONE
+            } else {
                 btnAddReminder?.setOnClickListener {
                     ReminderUtil.addEventToGoogleCalendar(itemView.context, match)
                 }
-            } else {
-                btnAddReminder?.visibility = View.GONE
             }
         }
     }

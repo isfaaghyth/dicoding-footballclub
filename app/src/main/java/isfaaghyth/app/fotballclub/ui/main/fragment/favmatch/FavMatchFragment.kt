@@ -25,10 +25,10 @@ class FavMatchFragment : BaseFragment<FavMatchPresenter>(), FavMatchView {
         lstFavMatch.layoutManager = LinearLayoutManager(context())
         lstFavMatch.adapter = adapter
         swipeRefresh.setOnRefreshListener { getFavoriteLocal() }
-        swipeRefresh.post({
+        swipeRefresh.post {
             swipeRefresh.isRefreshing = true
             getFavoriteLocal()
-        })
+        }
     }
 
     private fun getFavoriteLocal() {

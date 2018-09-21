@@ -14,9 +14,9 @@ open class PrevMatchPresenter(val view: PrevMatchView, private val scheduler: Sc
         super.attachView(view)
     }
 
-    fun getPrevMatch(id: String) {
+    fun getPrevMatchByLeagueId(matchId: String) {
         view().showLoading()
-        subscribe(getService().prevMatch(id)
+        subscribe(getService().getMatchByLeagueId(matchId)
                 .observeOn(scheduler.mainThread())
                 .subscribeOn(scheduler.io())
                 .subscribe(
@@ -28,6 +28,15 @@ open class PrevMatchPresenter(val view: PrevMatchView, private val scheduler: Sc
                         },
                         this::catchError
                 ))
+    }
+
+    fun getLeagues() {
+        subscribe(getService().getAllLeagues()
+                .observeOn(scheduler.mainThread())
+                .subscribeOn(scheduler.io())
+                .subscribe({
+                    res -> view().onAllLeagues(res)
+                }, this::catchError))
     }
 
 }

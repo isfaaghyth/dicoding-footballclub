@@ -42,4 +42,7 @@ interface Routes {
     @GET("api/v1/json/1/searchevents.php")
     fun searchMatchByTeam(@Query("e") teamName: String) : Single<Events>
 
+    @GET("api/v1/json/1/eventspastleague.php")
+    fun getMatchByLeagueId(@Query("id") leagueId: String) : Flowable<MatchEvent>
+
 }

@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +26,6 @@
         <activity android:name=".ui.teamdetail.TeamDetailActivity"/>
         <activity android:name=".ui.playerdetail.PlayerDetailActivity"/>
 
-        <activity android:name=".ui.searchmatch.team.TeamActivity"/>
         <activity android:name=".ui.searchmatch.SearchMatchActivity"/>
 
     </application>

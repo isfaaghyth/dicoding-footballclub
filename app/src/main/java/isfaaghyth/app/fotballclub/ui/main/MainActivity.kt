@@ -42,11 +42,6 @@ class MainActivity : AppCompatActivity() {
         }).check()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        //menuInflater.inflate(R.menu.search_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
     private fun setupViewPagerMain() {
         viewpagerMain.setPagingEnabled(false)
         viewpagerMain.offscreenPageLimit = 3
