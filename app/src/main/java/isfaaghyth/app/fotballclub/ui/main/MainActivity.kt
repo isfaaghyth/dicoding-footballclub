@@ -1,12 +1,23 @@
 package isfaaghyth.app.fotballclub.ui.main
 
+import android.Manifest
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.ui.main.fragment.favmatch.FavMatchFragment
+import isfaaghyth.app.fotballclub.ui.main.fragment.matches.MatchesFragment
 import isfaaghyth.app.fotballclub.ui.main.fragment.nextmatch.NextMatchFragment
 import isfaaghyth.app.fotballclub.ui.main.fragment.prevmatch.PrevMatchFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import android.Manifest.permission
+import android.Manifest.permission.RECORD_AUDIO
+import android.Manifest.permission.READ_CONTACTS
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.listener.PermissionRequest
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +27,15 @@ class MainActivity : AppCompatActivity() {
         setupViewPagerMain()
         onBottomBarSelected()
         bottomBarMain.selectedItemId = R.id.mnPrevMatch
+
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.WRITE_CALENDAR,
+                        Manifest.permission.READ_CALENDAR
+                ).withListener(object : MultiplePermissionsListener {
+            override fun onPermissionsChecked(report: MultiplePermissionsReport?) = Unit
+            override fun onPermissionRationaleShouldBeShown(permissions: MutableList<PermissionRequest>?, token: PermissionToken?) = Unit
+        }).check()
     }
 
     private fun setupViewPagerMain() {
@@ -23,9 +43,9 @@ class MainActivity : AppCompatActivity() {
         viewpagerMain.offscreenPageLimit = 3
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(PrevMatchFragment())
-        adapter.addFragment(NextMatchFragment())
-        adapter.addFragment(FavMatchFragment())
+        adapter.addFragment(MatchesFragment(), "Matches")
+        adapter.addFragment(NextMatchFragment(), "Next Match")
+        adapter.addFragment(FavMatchFragment(), "Fav Match")
         viewpagerMain.adapter = adapter
     }
 

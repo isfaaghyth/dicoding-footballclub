@@ -1,43 +1,28 @@
-package isfaaghyth.app.fotballclub.ui.main.fragment.nextmatch
+package isfaaghyth.app.fotballclub.utils
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.support.v4.content.ContextCompat
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.provider.CalendarContract
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v4.app.ActivityCompat
 import android.widget.Toast
-import isfaaghyth.app.fotballclub.R
-import isfaaghyth.app.fotballclub.base.BaseFragment
 import isfaaghyth.app.fotballclub.data.model.Match
-import isfaaghyth.app.fotballclub.data.model.MatchEvent
-import isfaaghyth.app.fotballclub.ui.adapter.MatchAdapter
-import isfaaghyth.app.fotballclub.utils.reactive.AppSchedulerProvider
-import kotlinx.android.synthetic.main.fragment_next_match.*
 import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 
 /**
- * Created by isfaaghyth on 9/19/18.
+ * Created by isfaaghyth on 9/21/18.
  * github: @isfaaghyth
  */
-class NextMatchFragment : BaseFragment<NextMatchPresenter>(), NextMatchView {
+object ReminderUtil {
 
-    override fun presenter(): NextMatchPresenter = NextMatchPresenter(this, AppSchedulerProvider())
-    override fun contentView(): Int = R.layout.fragment_next_match
-
-    private lateinit var adapter: MatchAdapter
-
-    override fun onCreated() {
-        lstNextMatch.layoutManager = LinearLayoutManager(context())
-        presenter().getNextMatch()
-    }
-
-    override fun onNextMatchData(matches: MatchEvent) {
-        adapter = MatchAdapter(matches.events)
-        lstNextMatch.adapter = adapter
-    }
-
-    private fun getGoogleCalendarId(): Long {
+    fun getGoogleCalendarId(activity: Context?): Long {
         val projection = arrayOf(CalendarContract.Calendars._ID, CalendarContract.Calendars.NAME, CalendarContract.Calendars.ACCOUNT_NAME, CalendarContract.Calendars.ACCOUNT_TYPE)
-        val calCursor = this.activity?.contentResolver
+        val calCursor = activity?.contentResolver
                 ?.query(CalendarContract.Calendars.CONTENT_URI, projection,
                         CalendarContract.Calendars.VISIBLE + " = 1", null, CalendarContract.Calendars._ID + " ASC")
         if (calCursor!!.moveToFirst()) {
@@ -50,13 +35,13 @@ class NextMatchFragment : BaseFragment<NextMatchPresenter>(), NextMatchView {
 
     }
 
-    private fun addEventToGoogleCalendar(match: Match) {
-        if(match.intHomeScore != null) toast("This event has passed, please choose the upcoming one!")
+    fun addEventToGoogleCalendar(activity: Context?, match: Match) {
+        if(match.intHomeScore != null) activity?.toast("This event has passed, please choose the upcoming one!")
 
-        val calId = getGoogleCalendarId()
+        val calId = getGoogleCalendarId(activity)
 
         if (calId == -1L) {
-            Toast.makeText(context(), "Somethings went wrong, try again!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Somethings went wrong, try again!", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -77,7 +62,7 @@ class NextMatchFragment : BaseFragment<NextMatchPresenter>(), NextMatchView {
         intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, timeInMillis)
         intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end)
         intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "Television")
-        startActivity(intent)
+        activity?.startActivity(intent)
     }
 
 }

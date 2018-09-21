@@ -61,12 +61,12 @@
                 android:orientation="vertical"
                 android:gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Date"
-                    android:textStyle="bold"
-                    android:textSize="12sp"/>
+                <ImageView
+                    android:id="@+id/btnAddReminder"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/ic_date"
+                    android:layout_marginBottom="6dp"/>
 
                 <TextView
                     android:id="@+id/txtDate"
