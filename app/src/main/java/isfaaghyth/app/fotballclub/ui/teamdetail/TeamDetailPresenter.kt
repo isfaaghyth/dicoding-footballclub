@@ -16,7 +16,8 @@ import org.jetbrains.anko.db.select
  * Created by isfaaghyth on 9/20/18.
  * github: @isfaaghyth
  */
-class TeamDetailPresenter(view: TeamDetailView, private val subscriber: SchedulerProvider) : BasePresenter<TeamDetailView>() {
+class TeamDetailPresenter(view: TeamDetailView, private val subscriber: SchedulerProvider)
+    : BasePresenter<TeamDetailView>() {
 
     init { super.attachView(view) }
 

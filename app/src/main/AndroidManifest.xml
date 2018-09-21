@@ -23,6 +23,7 @@
 
         <activity android:name=".ui.matchdetail.MatchDetailActivity"/>
         <activity android:name=".ui.teamdetail.TeamDetailActivity"/>
+        <activity android:name=".ui.playerdetail.PlayerDetailActivity"/>
 
     </application>
 

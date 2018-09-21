@@ -3,6 +3,7 @@ package isfaaghyth.app.fotballclub.ui.teamdetail
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.view.Menu
+import android.view.MenuItem
 import com.bumptech.glide.Glide
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.base.BaseActivity
@@ -19,7 +20,6 @@ import org.jetbrains.anko.db.select
 /**
  * Created by isfaaghyth on 9/20/18.
  * github: @isfaaghyth
- * @TODO(still unused code, but maybe will be use it for the next submission)
  */
 class TeamDetailActivity : BaseActivity<TeamDetailPresenter>(), TeamDetailView {
 
@@ -34,9 +34,9 @@ class TeamDetailActivity : BaseActivity<TeamDetailPresenter>(), TeamDetailView {
         showBackButton(true)
         team = intent.getSerializableExtra("team") as Team
         lstPlayers.layoutManager = GridLayoutManager(context(), 3)
+        lstPlayers.isNestedScrollingEnabled = false
         showTeamDetail(team)
     }
-
 
     private fun favoriteState() = database.use {
         val result = select(TeamEntity.TABLE_TEAM).whereArgs("(TEAM_ID = {id})", "id" to team.idTeam)
@@ -50,6 +50,22 @@ class TeamDetailActivity : BaseActivity<TeamDetailPresenter>(), TeamDetailView {
         menuItem = menu
         favoriteState()
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.mnFavorite -> {
+                isFavorite = if (!isFavorite) {
+                    presenter().addToFavorite(this, team)
+                    !isFavorite
+                } else {
+                    presenter().removeFromFavorite(this, team.idTeam)
+                    !isFavorite
+                }
+                setFavorite()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun showTeamDetail(team: Team) {

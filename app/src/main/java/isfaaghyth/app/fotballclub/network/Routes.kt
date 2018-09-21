@@ -34,6 +34,6 @@ interface Routes {
     fun getAllLeagues() : Single<Leagues>
 
     @GET("api/v1/json/1/lookup_all_players.php")
-    fun getPlayersByTeam(@Query("teamId") teamId: String) : Flowable<Players>
+    fun getPlayersByTeam(@Query("id") teamId: String) : Flowable<Players>
 
 }
