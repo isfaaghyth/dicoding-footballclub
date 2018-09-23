@@ -1,5 +1,6 @@
 package isfaaghyth.app.fotballclub.ui.main.fragment.prevmatch
 
+import io.reactivex.Flowable
 import io.reactivex.Single
 import isfaaghyth.app.fotballclub.base.BaseView
 import isfaaghyth.app.fotballclub.data.model.MatchEvent
@@ -35,21 +36,21 @@ class PrevMatchPresenterTest {
     @Mock
     private lateinit var matches: MatchEvent
 
-    private lateinit var singleMatches: Single<MatchEvent>
+    private lateinit var singleMatches: Flowable<MatchEvent>
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         scheduler = TestSchedulerProvider()
-        singleMatches = Single.just(matches)
+        singleMatches = Flowable.just(matches)
         presenter = PrevMatchPresenter(view, scheduler)
-        `when`(routes.prevMatch("4328")).thenReturn(singleMatches)
+        `when`(routes.getMatchPastByLeagueId("4328")).thenReturn(singleMatches)
     }
 
     @Test
     fun getPrevMatch() {
         launch { verify(view).showLoading() }
-        presenter.getPrevMatch("4328")
+        presenter.getPrevMatchByLeagueId("4328")
         launch { verify(view).onPrevMatchData(matches) }
         launch { verify(view).hideLoading() }
     }

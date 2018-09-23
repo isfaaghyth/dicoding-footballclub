@@ -1,6 +1,7 @@
 package isfaaghyth.app.fotballclub.ui.adapter
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import isfaaghyth.app.fotballclub.data.model.Match
 import isfaaghyth.app.fotballclub.ui.matchdetail.MatchDetailActivity
 import isfaaghyth.app.fotballclub.utils.ReminderUtil
 import kotlinx.android.synthetic.main.item_match_schedule.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by isfaaghyth on 9/19/18.
@@ -43,18 +46,24 @@ class MatchAdapter(private var matches: List<Match>): RecyclerView.Adapter<Match
             txtAwayTeam?.text = match.strAwayTeam
             txtDate?.text = match.dateEvent
 
-            if (match.intHomeScore !== null) {
+            val sdf = SimpleDateFormat("yyyy-MM-dd")
+            val dateMatch = sdf.parse(match.dateEvent) as Date
+            val dateNow = sdf.parse(sdf.format(Calendar.getInstance().time))
+
+            if (dateMatch > dateNow || dateMatch == dateNow) {
+                btnAddReminder?.setOnClickListener {
+                    ReminderUtil.addEventToGoogleCalendar(itemView.context, match)
+                }
+            } else {
                 val homeScore: Int? = match.intHomeScore?.toInt() ?: 0
                 val awayScore: Int? = match.intAwayScore?.toInt() ?: 0
                 txtHomeTeam?.text = "${match.strHomeTeam} ($homeScore)"
                 txtAwayTeam?.text = "${match.strAwayTeam} ($awayScore)"
                 btnAddReminder?.visibility = View.GONE
-            } else {
-                btnAddReminder?.setOnClickListener {
-                    ReminderUtil.addEventToGoogleCalendar(itemView.context, match)
-                }
             }
+
         }
+
     }
 
 }

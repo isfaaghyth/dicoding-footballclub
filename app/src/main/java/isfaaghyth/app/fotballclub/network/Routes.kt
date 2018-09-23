@@ -12,12 +12,6 @@ import retrofit2.http.Query
  */
 interface Routes {
 
-    @GET("api/v1/json/1/eventspastleague.php") //4328
-    fun prevMatch(@Query("id") id: String) : Single<MatchEvent>
-
-    @GET("api/v1/json/1/eventsnextleague.php") //4328
-    fun nextMatch(@Query("id") id: String) : Single<MatchEvent>
-
     @GET("api/v1/json/1/lookupteam.php")
     fun teamDetail(@Query("id") id: String) : Single<Teams>
 
@@ -43,6 +37,9 @@ interface Routes {
     fun searchMatchByTeam(@Query("e") teamName: String) : Single<Events>
 
     @GET("api/v1/json/1/eventspastleague.php")
-    fun getMatchByLeagueId(@Query("id") leagueId: String) : Flowable<MatchEvent>
+    fun getMatchPastByLeagueId(@Query("id") leagueId: String) : Flowable<MatchEvent>
+
+    @GET("api/v1/json/1/eventsnextleague.php")
+    fun getMatchNewByLeagueId(@Query("id") leagueId: String) : Flowable<MatchEvent>
 
 }

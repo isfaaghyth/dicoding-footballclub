@@ -16,7 +16,7 @@ open class PrevMatchPresenter(val view: PrevMatchView, private val scheduler: Sc
 
     fun getPrevMatchByLeagueId(matchId: String) {
         view().showLoading()
-        subscribe(getService().getMatchByLeagueId(matchId)
+        subscribe(getService().getMatchPastByLeagueId(matchId)
                 .observeOn(scheduler.mainThread())
                 .subscribeOn(scheduler.io())
                 .subscribe(

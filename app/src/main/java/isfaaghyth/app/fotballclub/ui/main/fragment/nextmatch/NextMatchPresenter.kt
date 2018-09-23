@@ -12,9 +12,9 @@ class NextMatchPresenter(val view: NextMatchView, private val subscriber: Schedu
 
     init { super.attachView(view) }
 
-    fun getNextMatch() {
+    fun getNextMatchByLeagueId(matchId: String) {
         view().showLoading()
-        subscribe(getService().nextMatch("4328")
+        subscribe(getService().getMatchNewByLeagueId(matchId)
                 .observeOn(subscriber.mainThread())
                 .subscribeOn(subscriber.io())
                 .subscribe(
@@ -26,6 +26,15 @@ class NextMatchPresenter(val view: NextMatchView, private val subscriber: Schedu
                         },
                         this::catchError
                 ))
+    }
+
+    fun getLeagues() {
+        subscribe(getService().getAllLeagues()
+                .observeOn(subscriber.mainThread())
+                .subscribeOn(subscriber.io())
+                .subscribe({
+                    res -> view().onAllLeagues(res)
+                }, this::catchError))
     }
 
 }

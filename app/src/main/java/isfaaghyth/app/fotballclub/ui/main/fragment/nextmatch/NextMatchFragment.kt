@@ -3,9 +3,14 @@ package isfaaghyth.app.fotballclub.ui.main.fragment.nextmatch
 import android.content.Intent
 import android.provider.CalendarContract
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import isfaaghyth.app.fotballclub.R
 import isfaaghyth.app.fotballclub.base.BaseFragment
+import isfaaghyth.app.fotballclub.data.model.Leagues
 import isfaaghyth.app.fotballclub.data.model.Match
 import isfaaghyth.app.fotballclub.data.model.MatchEvent
 import isfaaghyth.app.fotballclub.ui.adapter.MatchAdapter
@@ -27,12 +32,36 @@ class NextMatchFragment : BaseFragment<NextMatchPresenter>(), NextMatchView {
 
     override fun onCreated() {
         lstNextMatch.layoutManager = LinearLayoutManager(context())
-        presenter().getNextMatch()
+        presenter().getLeagues()
     }
 
     override fun onNextMatchData(matches: MatchEvent) {
         adapter = MatchAdapter(matches.events)
         lstNextMatch.adapter = adapter
+    }
+
+    override fun onAllLeagues(leagues: Leagues) {
+        val strLeagues = leagues.leagues.map { it.strLeague }
+        val leaguesId = leagues.leagues.map { it.idLeague }
+        setDropdownLeague(spinnerNextMatch, strLeagues, object : SpinnerListener {
+            override fun getLeague(position: Int) {
+                presenter().getNextMatchByLeagueId(leaguesId[position])
+            }
+        })
+    }
+
+    private fun setDropdownLeague(spinner: Spinner, item: List<String>, listener: SpinnerListener) {
+        spinner.adapter = ArrayAdapter(context(), android.R.layout.simple_spinner_dropdown_item, item)
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                listener.getLeague(position)
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) = Unit
+        }
+    }
+
+    interface SpinnerListener {
+        fun getLeague(position: Int)
     }
 
     private fun getGoogleCalendarId(): Long {

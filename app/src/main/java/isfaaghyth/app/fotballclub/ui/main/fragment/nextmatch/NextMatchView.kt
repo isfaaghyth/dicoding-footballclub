@@ -1,6 +1,7 @@
 package isfaaghyth.app.fotballclub.ui.main.fragment.nextmatch
 
 import isfaaghyth.app.fotballclub.base.BaseView
+import isfaaghyth.app.fotballclub.data.model.Leagues
 import isfaaghyth.app.fotballclub.data.model.MatchEvent
 
 /**
@@ -9,4 +10,5 @@ import isfaaghyth.app.fotballclub.data.model.MatchEvent
  */
 interface NextMatchView : BaseView {
     fun onNextMatchData(matches: MatchEvent)
+    fun onAllLeagues(leagues: Leagues)
 }
